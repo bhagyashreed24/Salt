@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve myproject
+After=network.target
+
+[Service]
+User=msys
+Group=www-data
+WorkingDirectory=/home/msys/FLASKAPP
+Environment="PATH=/home/msys/FLASKAPP/myprojectenv/bin"
+ExecStart=/home/msys/FLASKAPP/myprojectenv/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
